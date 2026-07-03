@@ -1,0 +1,5 @@
+CompileFlags:
+  Add:
+    - -Iobj_dir
+    - '-IC:\Users\imam_\AppData\Roaming\Code\User\globalStorage\llvm-vs-code-extensions.vscode-clangd\install\22.1.6\clangd_22.1.6\lib\clang\22\include'
+    - '-IC:\Users\imam_\Documents\Dev\experiment\verilator\include'

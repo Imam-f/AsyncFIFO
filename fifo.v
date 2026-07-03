@@ -13,23 +13,27 @@ module fifo
             wr_en,
             [BITWIDTH-1:0] wr_data,
         
+        input
+            clk_rd,
+            rd_en,
+        
         output 
             full,
             empty,
-            [BITWIDTH-1:0] rd_data,
+            [BITWIDTH-1:0] rd_data
     );
 
     reg [BITWIDTH-1:0] fifo_mem [0:DEPTH-1];
 
-    reg [$$clog2(DEPTH)-1:0] wr_ptr;
-    reg [$$clog2(DEPTH)-1:0] rd_ptr;
+    reg [$clog2(DEPTH)-1:0] wr_ptr;
+    reg [$clog2(DEPTH)-1:0] rd_ptr;
 
-    wire full;
     assign full = (wr_ptr + 1 == rd_ptr);
-
-    wire empty;
     assign empty = (wr_ptr == rd_ptr);
 
+    reg [BITWIDTH-1:0] rd_data_wr;
+    assign rd_data = rd_data_wr;
+    
     always @(posedge clk_wr) begin
         if (!rst_n) begin
             wr_ptr <= 0;
@@ -39,11 +43,11 @@ module fifo
         end
     end
 
-    always @(posedge clk_wr) begin
+    always @(posedge clk_rd) begin
         if (!rst_n) begin
             rd_ptr <= 0;
         end else if (rd_en && !empty) begin
-            rd_data <= fifo_mem[rd_ptr];
+            rd_data_wr <= fifo_mem[rd_ptr];
             rd_ptr <= rd_ptr + 1;
         end
     end
