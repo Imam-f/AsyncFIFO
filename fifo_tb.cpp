@@ -1,7 +1,6 @@
 #include <cstdint>
 #include <cstdlib>
 #include <iostream>
-#include <iomanip>
 #include <verilated.h>
 #include <verilated_vcd_c.h>
 #include "Vfifo.h"
@@ -72,7 +71,8 @@ int main(int argc, char **argv, char **envp) {
         bool wr_posedge = (dut->clk_wr == 1 && clk_wr_prev == 0);
         bool rd_posedge = (dut->clk_rd == 1 && clk_rd_prev == 0);
 
-        std::cout << "Time: " << sim_time << ", write_count: " << write_cnt << ", read_count: " << read_cnt << std::endl;
+        std::cout << "Time: " << sim_time << ", write_count: " << 
+            write_cnt << ", read_count: " << read_cnt << std::endl;
 
         if (wr_posedge && write_cnt < MAX_WRITES) {
             if (!wr_asserted) {
@@ -101,8 +101,6 @@ int main(int argc, char **argv, char **envp) {
 
         eval_model(dut, m_trace);
     }
-
-    std::cout << "Testbench completed." << std::endl;
 
     for (int i = 0; i < FINAL_CYCLES; i++) {
         if (sim_time % CLK_WR_TOGGLE == 0) {
