@@ -1,52 +1,34 @@
 [
   {
-    "directory": "C:/Users/imam_/Documents/Dev/AsyncFIFO/obj_dir",
-    "file": "C:/Users/imam_/Documents/Dev/AsyncFIFO/fifo_tb.cpp",
+    "directory": "/mnt/c/Users/imam_/Documents/Dev/AsyncFIFO/obj_dir",
+    "file": "/mnt/c/Users/imam_/Documents/Dev/AsyncFIFO/fifo_tb.cpp",
     "arguments": [
       "g++", "-Os",
       "-I.", "-I..",
-      "-IC:/Users/imam_/Documents/Dev/experiment/verilator/include",
-      "-IC:/Users/imam_/Documents/Dev/experiment/verilator/include/vltstd",
-      "-IC:/Users/imam_/AppData/Roaming/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/22.1.6/clangd_22.1.6/lib/clang/22/include",
-      "-IC:/Users/imam_/AppData/Roaming/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/22.1.6/clangd_22.1.6/lib/clang/22/include/llvm_libc_wrappers",
-      "-DVERILATOR=1",
-      "-DVM_COVERAGE=0", "-DVM_SC=0", "-DVM_TIMING=0",
-      "-DVM_TRACE=1", "-DVM_TRACE_FST=0", "-DVM_TRACE_VCD=1",
-      "-DVM_TRACE_SAIF=0", "-DVM_VPI=0",
+      "-I/usr/share/verilator/include",
+      "-I/usr/share/verilator/include/vltstd",
       "-c", "-o", "fifo_tb.o", "../fifo_tb.cpp"
     ]
   },
   {
-    "directory": "C:/Users/imam_/Documents/Dev/AsyncFIFO/obj_dir",
-    "file": "C:/Users/imam_/Documents/Dev/AsyncFIFO/obj_dir/Vfifo.cpp",
+    "directory": "/mnt/c/Users/imam_/Documents/Dev/AsyncFIFO/obj_dir",
+    "file": "/mnt/c/Users/imam_/Documents/Dev/AsyncFIFO/obj_dir/Vfifo.cpp",
     "arguments": [
       "g++", "-Os",
       "-I.", "-I..",
-      "-IC:/Users/imam_/Documents/Dev/experiment/verilator/include",
-      "-IC:/Users/imam_/Documents/Dev/experiment/verilator/include/vltstd",
-      "-IC:/Users/imam_/AppData/Roaming/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/22.1.6/clangd_22.1.6/lib/clang/22/include",
-      "-IC:/Users/imam_/AppData/Roaming/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/22.1.6/clangd_22.1.6/lib/clang/22/include/llvm_libc_wrappers",
-      "-DVERILATOR=1",
-      "-DVM_COVERAGE=0", "-DVM_SC=0", "-DVM_TIMING=0",
-      "-DVM_TRACE=1", "-DVM_TRACE_FST=0", "-DVM_TRACE_VCD=1",
-      "-DVM_TRACE_SAIF=0", "-DVM_VPI=0",
+      "-I/usr/share/verilator/include",
+      "-I/usr/share/verilator/include/vltstd",
       "-c", "-o", "Vfifo.o", "Vfifo.cpp"
     ]
   },
   {
-    "directory": "C:/Users/imam_/Documents/Dev/AsyncFIFO/obj_dir",
-    "file": "C:/Users/imam_/Documents/Dev/AsyncFIFO/what.cpp",
+    "directory": "/mnt/c/Users/imam_/Documents/Dev/AsyncFIFO/obj_dir",
+    "file": "/mnt/c/Users/imam_/Documents/Dev/AsyncFIFO/what.cpp",
     "arguments": [
       "g++", "-Os",
       "-I.", "-I..",
-      "-IC:/Users/imam_/Documents/Dev/experiment/verilator/include",
-      "-IC:/Users/imam_/Documents/Dev/experiment/verilator/include/vltstd",
-      "-IC:/Users/imam_/AppData/Roaming/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/22.1.6/clangd_22.1.6/lib/clang/22/include",
-      "-IC:/Users/imam_/AppData/Roaming/Code/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/22.1.6/clangd_22.1.6/lib/clang/22/include/llvm_libc_wrappers",
-      "-DVERILATOR=1",
-      "-DVM_COVERAGE=0", "-DVM_SC=0", "-DVM_TIMING=0",
-      "-DVM_TRACE=1", "-DVM_TRACE_FST=0", "-DVM_TRACE_VCD=1",
-      "-DVM_TRACE_SAIF=0", "-DVM_VPI=0",
+      "-I/usr/share/verilator/include",
+      "-I/usr/share/verilator/include/vltstd",
       "-c", "-o", "what.o", "../what.cpp"
     ]
   }

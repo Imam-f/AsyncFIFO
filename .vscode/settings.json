@@ -1,3 +1,6 @@
 {
-  "clangd.arguments": []
+    "C_Cpp.default.includePath": [
+        "mnt/c/Users/imam_/Documents/Dev/Libraries/verilator/include",
+        "mnt/c/Users/imam_/Documents/Dev/Libraries/verilator/include/vltstd",
+  ],
 }
