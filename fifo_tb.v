@@ -41,8 +41,6 @@ module fifo_tb #(
 
     reg wr_done = 0;
     reg rd_done = 0;
-    reg wr_state = 0;
-    reg rd_state = 0;
     reg [6:0] wr_count = 0;
     reg [6:0] rd_count = 0;
 
@@ -74,61 +72,41 @@ module fifo_tb #(
 
     always @(posedge clk_wr) begin
         if (!rst_n) begin
-            wr_state <= 0;
             wr_en <= 0;
             wr_data <= 0;
             wr_count <= 0;
             wr_done <= 0;
         end else begin
-            case (wr_state)
-                0: begin
-                    wr_en <= 0;
-                    if (wr_count >= MAX_WRITES) begin
-                        wr_done <= 1;
-                    end else begin
-                        wr_state <= 1;
-                    end
+            if (wr_en) begin
+                wr_en <= 0;
+                wr_count <= wr_count + 1;
+                if (wr_count >= MAX_WRITES - 1) begin
+                    wr_done <= 1;
                 end
-                1: begin
-                    if (!full) begin
-                        wr_en <= 1;
-                        wr_data <= $random % (2**BITWIDTH);
-                        wr_count <= wr_count + 1;
-                        wr_state <= 0;
-                    end else begin
-                        wr_en <= 0;
-                    end
+            end else if (!wr_done) begin
+                wr_en <= !full;
+                if (!full) begin
+                    wr_data <= $random % (2**BITWIDTH);
                 end
-            endcase
+            end
         end
     end
 
     always @(posedge clk_rd) begin
         if (!rst_n) begin
-            rd_state <= 0;
             rd_en <= 0;
             rd_count <= 0;
             rd_done <= 0;
         end else begin
-            case (rd_state)
-                0: begin
-                    rd_en <= 0;
-                    if (rd_count >= MAX_READS) begin
-                        rd_done <= 1;
-                    end else begin
-                        rd_state <= 1;
-                    end
+            if (rd_en) begin
+                rd_en <= 0;
+                rd_count <= rd_count + 1;
+                if (rd_count >= MAX_READS - 1) begin
+                    rd_done <= 1;
                 end
-                1: begin
-                    if (!empty) begin
-                        rd_en <= 1;
-                        rd_count <= rd_count + 1;
-                        rd_state <= 0;
-                    end else begin
-                        rd_en <= 0;
-                    end
-                end
-            endcase
+            end else if (!rd_done) begin
+                rd_en <= !empty;
+            end
         end
     end
 

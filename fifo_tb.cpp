@@ -79,8 +79,8 @@ int main(int argc, char **argv, char **envp) {
                 dut->wr_en = !dut->full;
                 if (!dut->full) {
                     dut->wr_data = rand() % (1 << BITWIDTH);
+                    wr_asserted = true;
                 }
-                wr_asserted = true;
             } else {
                 dut->wr_en = 0;
                 wr_asserted = false;
@@ -91,7 +91,9 @@ int main(int argc, char **argv, char **envp) {
         if (rd_posedge && read_cnt < MAX_READS) {
             if (!rd_asserted) {
                 dut->rd_en = !dut->empty;
-                rd_asserted = true;
+                if (!dut->empty) {
+                    rd_asserted = true;
+                }
             } else {
                 dut->rd_en = 0;
                 rd_asserted = false;
@@ -117,5 +119,6 @@ int main(int argc, char **argv, char **envp) {
     m_trace->close();
     delete dut;
     exit(EXIT_SUCCESS);
+    
     return 0;
 }
