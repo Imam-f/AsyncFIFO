@@ -1,10 +1,9 @@
 `timescale 1ns / 1ps
 
-module fifo_tb #(
-        parameter BITWIDTH = 8,
-        parameter DEPTH = 16
-    )();
+module fifo_tb;
 
+    localparam BITWIDTH = 8,
+    localparam DEPTH = 16;
     localparam MAX_WRITES    = 60;
     localparam MAX_READS     = 60;
     localparam CLK_WR_DELAY  = 3;
@@ -41,8 +40,8 @@ module fifo_tb #(
 
     reg wr_done = 0;
     reg rd_done = 0;
-    reg [6:0] wr_count = 0;
-    reg [6:0] rd_count = 0;
+    reg [$clog2(MAX_WRITES)-1:0] wr_count = 0;
+    reg [$clog2(MAX_READS)-1:0] rd_count = 0;
 
     initial begin
         `ifdef VCD_DUMP
@@ -86,7 +85,7 @@ module fifo_tb #(
             end else if (!wr_done) begin
                 wr_en <= !full;
                 if (!full) begin
-                    wr_data <= $random % (2**BITWIDTH);
+                    wr_data <= $random % (1 << BITWIDTH);
                 end
             end
         end
