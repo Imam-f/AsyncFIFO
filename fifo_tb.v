@@ -50,6 +50,11 @@ module fifo_tb #(
 
         #RESET_DELAY rst_n = 1;
 
+        `ifdef VCD_DUMP
+        $dumpfile("waveform.vcd");
+        $dumpvars(0, fifo_tb);
+        `endif
+
         $display("Starting FIFO Testbench...");
         $monitor("Time: %0t | wr_en: %b | wr_data: %h | rd_en: %b | rd_data: %h | full: %b | empty: %b", 
                  $time, wr_en, wr_data, rd_en, rd_data, full, empty);
