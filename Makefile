@@ -13,7 +13,6 @@ obj_dir/$(MODULE).vvp: $(MODULE).v $(MODULE)_tb.v | obj_dir
 	@echo
 	@echo "### COMPILING WITH ICARUS VERILOG ###"
 	iverilog -g2005 -o obj_dir/$(MODULE).vvp -DVCD_DUMP -DICARUS $(MODULE).v $(MODULE)_tb.v
-# 	iverilog -g2005 -o obj_dir/$(MODULE).vvp -DVCD_DUMP $(MODULE).v $(MODULE)_tb.v
 
 obj_dir:
 	mkdir -p obj_dir
@@ -27,7 +26,7 @@ obj_dir/V$(MODULE).v: $(MODULE).v $(MODULE)_tb.cpp
 	@echo "### VERILATING ###"
 	verilator -Wall --trace --x-assign unique --x-initial unique -cc $(MODULE).v --exe $(MODULE)_tb.cpp
 
-obj_dir/V$(MODULE)$(EXE): obj_dir/V$(MODULE)
+obj_dir/V$(MODULE)$(EXE): obj_dir/V$(MODULE).v
 	@echo
 	@echo "### BUILDING SIM ###"
 	make -C obj_dir -f V$(MODULE).mk V$(MODULE)
@@ -54,7 +53,7 @@ waveform.vcd: obj_dir/$(MODULE).vvp
 	@echo "### SIMULATING (iverilog) ###"
 	vvp obj_dir/$(MODULE).vvp
 else ifeq ($(SIM),verilator)
-waveform.vcd: obj_dir/V$(MODULE)
+waveform.vcd: obj_dir/V$(MODULE)$(EXE)
 	@echo
 	@echo "### SIMULATING (verilator) ###"
 	./obj_dir/V$(MODULE) +verilator+rand+reset+2

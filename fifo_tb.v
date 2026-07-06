@@ -60,28 +60,15 @@ module fifo_tb #(
         clk_rd = 0;
         rd_en = 0;
 
-        repeat (RESET_DELAY) begin
-            #1 clk_wr = ~clk_wr;
-            #1 clk_rd = ~clk_rd;
-        end
-
         #RESET_DELAY rst_n = 1;
 
         $display("Starting FIFO Testbench...");
         $monitor("Time: %0t | wr_en: %b | wr_data: %h | rd_en: %b | rd_data: %h | full: %b | empty: %b", 
                  $time, wr_en, wr_data, rd_en, rd_data, full, empty);
 
-        // Drive the clock until the read and write operations are done
-        while (!wr_done || !rd_done) begin
-            #CLK_WR_DELAY clk_wr = ~clk_wr;
-            #CLK_RD_DELAY clk_rd = ~clk_rd;
-        end
+        @(wr_done && rd_done);
 
-        // Finish delay
-        repeat (FINAL_DELAY) begin
-            #CLK_WR_DELAY clk_wr = ~clk_wr;
-            #CLK_RD_DELAY clk_rd = ~clk_rd;
-        end
+        #FINAL_DELAY;
         $finish;
     end
 
@@ -106,11 +93,11 @@ module fifo_tb #(
                     if (!full) begin
                         wr_en <= 1;
                         wr_data <= $random % (2**BITWIDTH);
+                        wr_count <= wr_count + 1;
+                        wr_state <= 0;
                     end else begin
                         wr_en <= 0;
                     end
-                    wr_count <= wr_count + 1;
-                    wr_state <= 0;
                 end
             endcase
         end
@@ -135,17 +122,17 @@ module fifo_tb #(
                 1: begin
                     if (!empty) begin
                         rd_en <= 1;
+                        rd_count <= rd_count + 1;
+                        rd_state <= 0;
                     end else begin
                         rd_en <= 0;
                     end
-                    rd_count <= rd_count + 1;
-                    rd_state <= 0;
                 end
             endcase
         end
     end
 
-    // always #CLK_WR_DELAY clk_wr = ~clk_wr;
-    // always #CLK_RD_DELAY clk_rd = ~clk_rd;
+    always #CLK_WR_DELAY clk_wr = ~clk_wr;
+    always #CLK_RD_DELAY clk_rd = ~clk_rd;
 
 endmodule
