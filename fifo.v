@@ -3,26 +3,23 @@
 module fifo #(
         parameter BITWIDTH = 8,
         parameter DEPTH = 16
-    )(
-        input
-            rst_n,
+    ) (
+        input rst_n,
         
-        input
-            clk_wr,
-            wr_en,
-            [BITWIDTH-1:0] wr_data,
+        input clk_wr,
+        input wr_en,
+        input [BITWIDTH-1:0] wr_data,
         
-        input
-            clk_rd,
-            rd_en,
+        input clk_rd,
+        input rd_en,
         
-        output 
-            full,
-            empty,
-            [BITWIDTH-1:0] rd_data
+        output full,
+        output empty,
+        output [BITWIDTH-1:0] rd_data
     );
 
     reg [BITWIDTH-1:0] fifo_mem [0:DEPTH-1];
+    `include "fifo_mem_unpack.v"
 
     reg [$clog2(DEPTH)-1:0] wr_ptr;
     reg [$clog2(DEPTH)-1:0] rd_ptr;

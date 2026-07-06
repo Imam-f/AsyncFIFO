@@ -11,7 +11,7 @@
 #define MAX_READS 60
 #define CLK_WR_TOGGLE 3
 #define CLK_RD_TOGGLE 5
-#define RESET_CYCLES 2
+#define RESET_CYCLES 10
 #define FINAL_CYCLES 10
 
 uint64_t sim_time = 0;
