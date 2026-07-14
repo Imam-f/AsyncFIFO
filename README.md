@@ -111,3 +111,5 @@ The current pointer scheme also reserves one entry to distinguish full from empt
 No license has been specified yet.
 
 I dont understand how any of the jj works
+absolutely no idea
+about how this works
