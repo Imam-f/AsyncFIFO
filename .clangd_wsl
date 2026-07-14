@@ -1,0 +1,7 @@
+CompileFlags:
+  Add:
+    - -I. 
+    - -I..
+    - -I/usr/share/verilator/include
+    - -I/usr/share/verilator/include/vltstd
+    - -std=c++17

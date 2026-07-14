@@ -1,0 +1,5 @@
+CompileFlags:
+  Add:
+    - -Iobj_dir
+    - -IC:\Users\imam_\Documents\Dev\Libraries\verilator\include
+    - -std=c++17
